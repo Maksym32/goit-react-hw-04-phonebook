@@ -14,7 +14,6 @@ export function App() {
   ]);
   const [filter, setFilter] = useState('');
 
-  // проверка localStorage на наличие контактов
   useEffect(() => {
     const contactsStorage = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contactsStorage);
@@ -26,12 +25,10 @@ export function App() {
     }
   }, []);
 
-  // запись контакта в localStorage
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  // добавляет контакт в список
   const addContact = ({ name, number }) => {
     const findName = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -54,7 +51,6 @@ export function App() {
     setContacts(contacts => [...contacts, newContact]);
   };
 
-  // удаляет контакта из списка
   const deleteContact = contactId => {
     setContacts(contacts =>
       contacts.filter(contact => contact.id !== contactId)
@@ -65,7 +61,6 @@ export function App() {
     setFilter(e.currentTarget.value);
   };
 
-  // возвращает результат фильтра
   const filterContacts = () => {
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact =>
